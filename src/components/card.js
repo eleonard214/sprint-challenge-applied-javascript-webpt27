@@ -1,3 +1,5 @@
+import axios from "axios"
+
 const Card = (article) => {
   // TASK 5
   // ---------------------
@@ -17,6 +19,26 @@ const Card = (article) => {
   //   </div>
   // </div>
   //
+  const cardDiv = document.createElement('div').classList="card"
+  const  headlineDiv= document.createElement('div').classList="headline"
+  const authorDiv=document.createElement('div').classList="author"
+  const imgDiv=document.createElement('div').classList="img-container"
+  const authorImg=document.createElement('img')
+  const authorSpan=document.createElement('span')
+
+headlineDiv.textContent=`${article.headline}`
+authorImg.setAttribute('src', article.authorPhoto)
+authorSpan.textContent=`By ${article.authorName}`
+
+  imgDiv.appendChild(authorImg)
+  authorDiv.appendChild(imgDiv, authorSpan)
+  cardDiv.appendChild(headlineDiv, authorDiv)
+
+  cardDiv.addEventListener('click', console.log(`${article.headline}`))
+
+  return Card
+  
+
 }
 
 const cardAppender = (selector) => {
@@ -28,6 +50,40 @@ const cardAppender = (selector) => {
   // Create a card from each and every article object in the response, using the Card component.
   // Append each card to the element in the DOM that matches the selector passed to the function.
   //
+
+  axios.get("https://lambda-times-api.herokuapp.com/articles")
+  .then(res=>{
+    console.log(res.data.articles)
+  })
+
+  const javascript = res.data.articles.javascript
+  const bootstrap = res.data.articles.bootstrap
+  const technology = res.data.articles.technology
+  const jquery = res.data.articles.jquery
+  const node = res.data.articles.node
+
+javascript.forEach((article)=>{
+  document.querySelector(selector).appendChild(Card(article))
+})
+bootstrap.forEach((article)=>{
+  document.querySelector(selector).appendChild(Card(article))
+})
+
+technology.forEach((article) => {
+  document.querySelector(selector).appendChild(Card(article))
+})
+
+jquery.forEach((article) => {
+  document.querySelector(selector).appendChild(Card(article))
+})
+
+node.forEach((article) => {
+  document.querySelector(selector).appendChild(Card(article))
+})
+
+.catch(error=>{
+  console.log("WRONG!!!!")
+})
 }
 
 export { Card, cardAppender }
