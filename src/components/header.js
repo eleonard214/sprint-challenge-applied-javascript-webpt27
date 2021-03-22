@@ -17,13 +17,13 @@ const Header = (title, date, temp) => {
   const titleH1=document.createElement('h1').classList.add("title")
   const tempSpan=document.createElement('span').classList.add("temp")  
   
-  dateSpan.textContent = `${date}`
+  dateSpan.textContent = "date"
   titleH1.textContent = title
   tempSpan.textContent = temp
 
   headerDiv.appendChild(dateSpan, titleH1, tempSpan)
 
-  return Header
+  return headerDiv
   
 
 }

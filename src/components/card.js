@@ -52,15 +52,15 @@ const cardAppender = (selector) => {
   //
 
   axios.get("https://lambda-times-api.herokuapp.com/articles")
-  .then(res=>{
+  .then(result=>{
     console.log(res.data.articles)
   })
 
-  const javascript = res.data.articles.javascript
-  const bootstrap = res.data.articles.bootstrap
-  const technology = res.data.articles.technology
-  const jquery = res.data.articles.jquery
-  const node = res.data.articles.node
+  const javascript = result.data.articles.javascript
+  const bootstrap = result.data.articles.bootstrap
+  const technology = result.data.articles.technology
+  const jquery = result.data.articles.jquery
+  const node = result.data.articles.node
 
 javascript.forEach((article)=>{
   document.querySelector(selector).appendChild(Card(article))
